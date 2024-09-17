@@ -1,53 +1,48 @@
+//
+//  ContentView.swift
+//  apple-frameworks
+//
+//  Created by Eirik Andresen on 17/09/2024.
+//
+
 import SwiftUI
 
 struct FrameworkGridView: View {
     
-    let frameworks = MockData.frameworks
-    let columns: [GridItem] = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
-    
-    var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 20) {
-                ForEach(frameworks, id: \.name) { framework in
-                    FrameworkView(framework: framework)
-                }
-            }
-            .padding()
-        }
-    }
-}
-
-struct FrameworkView: View {
-    let framework: Framework
-    
     var body: some View {
         VStack {
-            Image(framework.imageName)
+            Image("app-clip")
                 .resizable()
+                .frame(width: 90, height: 90)
+            Text("App Clips")
+                .font(.title2)
+                .fontWeight(.semibold)
                 .scaledToFit()
-                .frame(width: 60, height: 60)
-                .cornerRadius(8)
+                .minimumScaleFactor(0.6)
             
-            Text(framework.name)
-                .font(.headline)
-                .padding(.top, 5)
-            
-            Text(framework.description)
-                .font(.subheadline)
-                .lineLimit(3) // Limit the text to 3 lines
-                .padding(.horizontal)
-                .padding(.top, 1)
+            }
         }
-        .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
-        .shadow(radius: 5)
-    }
 }
 
 #Preview {
     FrameworkGridView()
+}
+
+struct FrameworkTitleView : View {
+    let name: String
+    let imageName: String
+    
+    var body: some View {
+        VStack {
+            Image("app-clip")
+                .resizable()
+                .frame(width: 90, height: 90)
+            Text("App Clips")
+                .font(.title2)
+                .fontWeight(.semibold)
+                .scaledToFit()
+                .minimumScaleFactor(0.6)
+            
+            }
+    }
 }
