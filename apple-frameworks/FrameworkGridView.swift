@@ -9,10 +9,25 @@ import SwiftUI
 
 struct FrameworkGridView: View {
     
-    let columns: [GridItem] = [GridItem(.flexible())]
+    let columns: [GridItem] = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
     
     var body: some View {
-        FrameworkTitleView(appName: "App Clips", imageName: "app-clip")
+        NavigationView {
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    // id here is reduedent becasue our struct has type Identifiable with an id
+                    ForEach(MockData.frameworks, id: \.id) { item in
+                        FrameworkTitleView(framework: item)
+                    }
+                }
+            }
+            .navigationTitle(" Frameworks")
+        }
+        
     }
 }
 
@@ -21,20 +36,20 @@ struct FrameworkGridView: View {
 }
 
 struct FrameworkTitleView : View {
-    let appName: String
-    let imageName: String
+    let framework: Framework
     
     var body: some View {
         VStack {
-            Image(imageName)
+            Image(framework.imageName)
                 .resizable()
                 .frame(width: 90, height: 90)
-            Text(appName)
+            Text(framework.name)
                 .font(.title2)
                 .fontWeight(.semibold)
                 .scaledToFit()
                 .minimumScaleFactor(0.6)
             
             }
+        .padding()
     }
 }
